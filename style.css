@@ -33,13 +33,13 @@ body, html {
     transition: background-color 0.3s, color 0.1s;
 }
 
-/* Fix for Scrollbar Collision: Use width: 100% and more right padding */
+/* Fix for Scrollbar Collision: Use width: 100% and increased right padding */
 .app-container { 
     display: flex; 
     flex-direction: column; 
     min-height: 100vh; 
     width: 100%; 
-    padding: 10px 30px 10px 10px; /* Increased right padding */
+    padding: 10px 10px 10px 10px; 
 }
 
 /* --- Demo Ads Styling --- */
@@ -77,13 +77,13 @@ body, html {
 .main-header { display: flex; flex-direction: column; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); }
 .header-top { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 8px; }
 
-/* Theme Switch: More space from edge */
-.header-settings-group { display: flex; align-items: center; gap: 8px; margin-right: 40px; }
+/* Theme Switch: Added more space from edge */
+.header-settings-group { display: flex; align-items: center; gap: 8px; margin-right: 10px; }
 
 h1 { margin: 0; color: var(--primary-color); font-size: 20px; }
 .header-controls { display: flex; align-items: center; width: 100%; }
 
-.toolbar { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 10px; flex-wrap: wrap; padding-right: 25px; }
+.toolbar { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 10px; flex-wrap: wrap; padding-right: 0px; }
 .toolbar-left-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
 .format-btn { background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 8px; padding: 6px 12px; cursor: pointer; font-size: 14px; }
@@ -104,8 +104,8 @@ h1 { margin: 0; color: var(--primary-color); font-size: 20px; }
 #fontSizeDisplay { cursor: pointer; font-weight: 600; user-select: none; width: 30px; text-align: center; }
 .size-btn { background: none; border: none; color: var(--text-main); font-size: 20px; cursor: pointer; }
 
-/* Checkbox: More space from scroller */
-.save-option-toolbar { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; margin-left: auto; padding-right: 30px; }
+/* Save Option: More space from scroller */
+.save-option-toolbar { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; margin-left: auto; padding-right: 15px; }
 .checkbox-container { display: flex; align-items: center; gap: 6px; cursor: default; user-select: none; }
 .checkbox-container input { cursor: pointer; width: 16px; height: 16px; }
 
@@ -121,7 +121,7 @@ input:checked + .slider:before { transform: translateX(20px); }
 .workspace { flex-grow: 1; display: flex; position: relative; height: auto; }
 
 #textInput {
-    flex-grow: 1; min-height: 350px; height: 450px; padding: 20px; background-color: var(--bg-card);
+    flex-grow: 1; min-height: 350px; height: 620px; padding: 20px; background-color: var(--bg-card);
     color: var(--text-main) !important; 
     border: 1px solid var(--border-color); border-radius: 8px;
     outline: none; overflow-y: auto; 
@@ -131,8 +131,6 @@ input:checked + .slider:before { transform: translateX(20px); }
     font-size: 16px; line-height: 1.6;
     resize: vertical; 
 }
-
-#textInput:empty:before { content: attr(data-placeholder); color: var(--text-muted); opacity: 0.5; pointer-events: none; display: block; }
 
 #textInput::-webkit-scrollbar { width: 12px; }
 #textInput::-webkit-scrollbar-thumb { background-color: #484f58; border-radius: 10px; border: 3px solid var(--bg-card); cursor: pointer !important; }
@@ -235,7 +233,7 @@ kbd { background: #333; padding: 2px 4px; border-radius: 4px; border: 1px solid 
         padding-right: 5px;
     }
     
-    .format-btn { padding: 4px 8px; font-size: 12px; }
+    .format-btn { padding: 4px 8px; font-size: 14px; }
     .font-size-wrapper { padding: 1px 8px; }
     .size-btn { font-size: 16px; }
     .icon-btn { font-size: 18px; padding: 2px 4px; }

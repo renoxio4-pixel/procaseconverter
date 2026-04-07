@@ -58,7 +58,7 @@ window.addEventListener('load', () => {
 
 // --- 2. INPUT & CLEAN PASTE ---
 function handleInput() {
-    if (textArea.innerText.trim() === "") { textArea.innerHTML = ""; }
+    if (textArea.innerText === "\n") { textArea.innerHTML = ""; }
     updateStats(); 
     autoSave(); 
 }
@@ -170,7 +170,7 @@ function updateStats() {
     const text = textArea.innerText || "";
     charCount.innerText = text.length;
     wordCount.innerText = text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
-    lineCount.innerText = text === "" ? 0 : text.split('\n').length;
+    lineCount.innerText = (text === "" || text === "\n") ? 0 : text.split(/\r|\r\n|\n/).length;
 }
 
 function saveState() {
@@ -184,7 +184,8 @@ function saveState() {
 
 function applyTransformation(action) {
     saveState();
-    const text = textArea.innerText;
+    // Strip trailing newline added by contenteditable to prevent extra spaces
+    let text = textArea.innerText.replace(/\n$/, "");
     textArea.innerText = action(text);
     updateStats();
     autoSave();
@@ -192,8 +193,15 @@ function applyTransformation(action) {
 
 function toUpperCase() { applyTransformation(t => t.toUpperCase()); }
 function toLowerCase() { applyTransformation(t => t.toLowerCase()); }
-function toSentenceCase() { applyTransformation(t => t.toLowerCase().replace(/(^\s*\w|[\.\!\?]\s*\w)/g, c => c.toUpperCase())); }
-function toCapitalizedCase() { applyTransformation(t => t.toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')); }
+
+function toSentenceCase() { 
+    applyTransformation(t => t.toLowerCase().replace(/(^\s*\w|[.!?]\s+\w)/g, s => s.toUpperCase())); 
+}
+
+function toCapitalizedCase() { 
+    applyTransformation(t => t.toLowerCase().replace(/\b\w/g, s => s.toUpperCase())); 
+}
+
 function toInverseCase() { applyTransformation(t => t.split('').map(c => c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()).join('')); }
 function toAlternatingCase() { applyTransformation(t => { let chars = t.toLowerCase().split(''); for (let i = 0; i < chars.length; i++) if (i % 2 !== 0) chars[i] = chars[i].toUpperCase(); return chars.join(''); }); }
 
